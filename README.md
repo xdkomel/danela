@@ -16,7 +16,7 @@ This meant writing more boilerplate by creating new `ApiManager`s and `ApiReposi
 
 **Danela** (**D**art **A**bstract **Ne**twork **La**yer) encapsulates the network layer logic providing a modular, customizable, efficient, and intuitive solution. Move from the boilerplate and legacy mess to the general approach.
 
-![](docs/Danela-min.png)
+![](https://github.com/xdkomel/danela/blob/main/doc/Danela-min.png?raw=true)
 
 Danela, the approach, and this image was inspired by [Moya](https://github.com/Moya/Moya).
 
