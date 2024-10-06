@@ -1,0 +1,14 @@
+name: danela
+description: Dart Abstract Network Layer (Danela)
+version: 1.0.0
+repository: https://github.com/xdkomel/danela
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  dio: ^5.7.0
+
+dev_dependencies:
+  lints: ^4.0.0
+  test: ^1.24.0
