@@ -1,30 +1,38 @@
+import 'dart:async';
+
+import '../../danela.dart';
 import 'package:dio/dio.dart';
 
-import '../request.dart';
-import '../request_mapper.dart';
-import 'gateway.dart';
+/// [DioGateway] wraps Dio calls. It can only fetch and map the response, also 
+/// providing abilities to some Dio features like receiving the sending or 
+/// receiving progress via [onSendProgress] and [onReceiveProgress].
 
-class DioGateway<T> implements Gateway<T> {
-  final Dio dio;
-  final Request request;
-  final RequestMapper<Response, T>? mapper;
-  final void Function(int, int)? onSendProgress;
-  final void Function(int, int)? onReceiveProgress;
-  final Options? options;
-  final _cancelToken = CancelToken();
+class DioGateway<T extends Object> implements Gateway<T> {
   DioGateway({
     required this.dio,
-    required this.request,
     this.mapper,
     this.onReceiveProgress,
     this.onSendProgress,
     this.options,
   });
 
+  final Dio dio;
+  final RequestMapper<Response, T>? mapper;
+  final void Function(int, int)? onSendProgress;
+  final void Function(int, int)? onReceiveProgress;
+  final Options? options;
+  final _cancelToken = CancelToken();
+
   @override
-  Future<T> run() async {
+  void init() {}
+
+  @override
+  void dispose() => _cancelToken.cancel();
+
+  @override
+  Future<T> fetch(Request request) async {
     try {
-      final response = await _request();
+      final response = await _request(request);
       return switch (mapper?.mapResponse) {
         final f? => f(response),
         _ => switch (mapper?.mapData) {
@@ -43,7 +51,8 @@ class DioGateway<T> implements Gateway<T> {
     }
   }
 
-  Future<Response<dynamic>> _request() => switch (request.method) {
+  Future<Response<dynamic>> _request(Request request) =>
+      switch (request.method) {
         Method.get => dio.get(
             request.url,
             data: request.data,
@@ -94,7 +103,4 @@ class DioGateway<T> implements Gateway<T> {
             options: options,
           ),
       };
-
-  @override
-  void dispose() => _cancelToken.cancel();
 }

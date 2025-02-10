@@ -7,7 +7,9 @@ environment:
   sdk: ^3.5.3
 
 dependencies:
+  collection: ^1.19.0
   dio: ^5.7.0
+  rxdart: ^0.28.0
 
 dev_dependencies:
   lints: ^4.0.0
