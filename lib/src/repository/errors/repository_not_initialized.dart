@@ -1,1 +1,0 @@
-class RepositoryNotInitialized extends Error {}

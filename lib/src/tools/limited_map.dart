@@ -1,7 +1,9 @@
 class LimitedMap<K, V extends Object> {
-  LimitedMap({this.limit}) : assert(limit == null || limit > 0);
+  LimitedMap({required this.onRemove, this.limit})
+      : assert(limit == null || limit > 0);
 
   final int? limit;
+  final void Function(K, V) onRemove;
 
   final _map = <K, V>{};
 
@@ -12,7 +14,12 @@ class LimitedMap<K, V extends Object> {
     }
     final lim = limit;
     if (lim != null && _map.length >= lim) {
-      _map.remove(_map.keys.first);
+      final removeKey = _map.keys.first;
+      final value = _map[removeKey];
+      if (value != null) {
+        onRemove(removeKey, value);
+      }
+      _map.remove(removeKey);
     }
     _map[key] = value;
   }
@@ -22,4 +29,6 @@ class LimitedMap<K, V extends Object> {
   Iterable<V> get values => _map.values;
 
   void clear() => _map.clear();
+
+  bool get isEmpty => _map.isEmpty;
 }

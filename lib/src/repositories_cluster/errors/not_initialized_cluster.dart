@@ -1,1 +1,0 @@
-class NotInitializedCluster extends Error {}

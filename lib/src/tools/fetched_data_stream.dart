@@ -3,10 +3,10 @@ import 'dart:async';
 import 'fetched_data.dart';
 
 class FetchedDataStream<T> {
-  FetchedData<T> _value = const NoData();
+  FetchedData<T> _value = NoData<T>();
   final _streamController = StreamController<FetchedData<T>>.broadcast();
   FetchedDataStream() {
-    _streamController.add(const NoData());
+    _streamController.add(NoData<T>());
   }
 
   FetchedData<T> get value => _value;
@@ -18,7 +18,7 @@ class FetchedDataStream<T> {
     _streamController.add(data);
   }
 
-  void emitLoading() => _emit(const LoadingData());
+  void emitLoading() => _emit(LoadingData<T>());
 
   void emitSuccess(T data) => _emit(SuccessData(data));
 
@@ -26,6 +26,6 @@ class FetchedDataStream<T> {
 
   void close() {
     _streamController.close();
-    _value = const NoData();
+    _value = NoData<T>();
   }
 }

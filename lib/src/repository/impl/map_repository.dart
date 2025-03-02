@@ -1,6 +1,7 @@
-import '../../danela.dart';
-import '../tools/fetched_data.dart';
+import '../../../danela.dart';
+import '../../tools/fetched_data.dart';
 
+/// [MapRepository] maps the data from one repository using the [map] function.
 class MapRepository<A extends Object, B extends Object>
     implements Repository<B> {
   MapRepository({required this.repository, required this.map});
@@ -19,19 +20,25 @@ class MapRepository<A extends Object, B extends Object>
       );
 
   @override
-  void init() => repository.init();
+  void init() {
+    DanelaSettings.observerConfig.onInit?.call(this);
+  }
 
   @override
-  void dispose() => repository.dispose();
+  void dispose() {
+    DanelaSettings.observerConfig.onDispose?.call(this);
+  }
 
   @override
   Future<B> fetch(Request request) async {
+    DanelaSettings.observerConfig.onFetch?.call(this, request);
     final a = await repository.fetch(request);
     return map(a);
   }
 
   @override
   Future<B> fetchCached(Request request) async {
+    DanelaSettings.observerConfig.onFetchCached?.call(this, request);
     final a = await repository.fetchCached(request);
     return map(a);
   }

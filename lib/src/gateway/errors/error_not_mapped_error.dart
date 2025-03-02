@@ -1,0 +1,1 @@
+class ErrorNotMappedError extends Error {}
