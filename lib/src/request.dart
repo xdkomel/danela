@@ -1,6 +1,7 @@
 enum Method { get, post, delete, put, patch, head }
 
 class Request {
+  final Object? key;
   final String url;
   final Method method;
   final Object? data;
@@ -10,5 +11,6 @@ class Request {
     this.method = Method.get,
     this.data,
     this.queryParameters,
+    this.key,
   });
 }
