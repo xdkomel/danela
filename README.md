@@ -212,7 +212,7 @@ DanelaSettings.observerConfig = ObserverConfig(
 );
 ```
 
-## Comparison with [Retrofit](https://pub.dev/packages/retrofit) and [Chopper](https://github.com/lejard-h/chopper)
+## Comparison With [Retrofit](https://pub.dev/packages/retrofit) and [Chopper](https://github.com/lejard-h/chopper)
 
 Danela generally does the same thing, more or less, but without code generation. Due to more freedom, rest clients can be defined at same time when instantiated, which raises questions about the files organization and project architecture. I believe, in the hands of a careless developer, Danela can easily lead to a mess. There's probably less chance of it with Retrofit or Chopper.
 
@@ -258,7 +258,7 @@ final gateway = DioGateway(
 final gatewayTask = TaskEither(gateway.fetch);
 ```
 
-## Coming from Danela 1
+## Coming From Danela 1
 
 Dear brave Danela 1 users (max 51 people, including me), there are lots of major changes in the second version... However, since the first version was pretty minimal, only several changes would be noticed.
 
