@@ -1,18 +1,9 @@
-import 'dart:convert';
-
 import 'package:danela/danela.dart';
-import 'package:danela/src/settings/danela_settings.dart';
 import 'package:dio/dio.dart';
 
 String fromJson(Map<String, dynamic> d) => d['setup'];
 
 String fromError(Object e) => '$e';
-
-Request req(String q) => Request(
-      url:
-          'http://suggestqueries.google.com/complete/search?q=$q&client=chrome',
-      key: q,
-    );
 
 void main() async {
   DanelaSettings.observerConfig = ObserverConfig(
